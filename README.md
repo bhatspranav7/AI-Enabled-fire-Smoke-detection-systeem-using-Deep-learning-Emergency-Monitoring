@@ -64,7 +64,18 @@ See **[DEMO.md](DEMO.md)** for the full demonstration script (scenarios, what to
 | Training | 416 px, batch 16, 10 epochs (CPU time budget), seed 42, augmentation = HSV / flip / scale / ±5° rotation / mosaic, CPU (i5-1340P) |
 | Artifacts | `models/best.pt`, `models/training_config.json`, `models/eval_metrics.json`, `models/eval_report.md`, `models/eval/` (PR curves, confusion matrix), `models/error_analysis/` (FP/FN examples) |
 
-Results on the held-out test split are in [`models/eval_report.md`](models/eval_report.md).
+Results on the 600-image held-out test split ([`models/eval_report.md`](models/eval_report.md), 10 epochs on CPU, 95 min):
+
+| Class | Precision | Recall | F1 | mAP@0.5 | mAP@0.5:0.95 |
+|---|---|---|---|---|---|
+| fire | 0.448 | 0.503 | 0.474 | 0.461 | 0.229 |
+| smoke | 0.590 | 0.476 | 0.527 | 0.508 | 0.265 |
+| **all** | **0.519** | **0.490** | **0.504** | **0.485** | **0.247** |
+
+At the deployment operating point (conf 0.35): precision 0.685, recall 0.337; **60/60 negative images produced no detection**
+(0 % image-level false-alarm rate before temporal filtering). CPU latency 31.9 ms mean / 34.5 ms p95 at 416 px → ~31 fps
+on an i5-1340P with no GPU. These are a lower bound: same scripts scale to the full 48k-image corpus and larger YOLO11
+variants on a GPU.
 
 Reproduce:
 ```bash

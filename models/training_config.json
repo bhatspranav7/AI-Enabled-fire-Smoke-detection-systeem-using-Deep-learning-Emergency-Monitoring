@@ -1,0 +1,40 @@
+{
+  "run": "fire_smoke_v1",
+  "base_model": "yolo11n.pt",
+  "data": "C:\\Users\\Pranav Bhat\\Desktop\\fire alarm\\configs\\data.yaml",
+  "epochs": 10,
+  "imgsz": 416,
+  "batch": 16,
+  "seed": 42,
+  "fraction": 1.0,
+  "patience": 100,
+  "augmentation": {
+    "hsv_h": 0.015,
+    "hsv_s": 0.6,
+    "hsv_v": 0.5,
+    "fliplr": 0.5,
+    "scale": 0.5,
+    "degrees": 5.0,
+    "translate": 0.1,
+    "mosaic": 1.0
+  },
+  "training_time_minutes": 94.9,
+  "hardware": {
+    "device": "cpu",
+    "cpu": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "machine": "AMD64",
+    "cuda": false
+  },
+  "versions": {
+    "python": "3.13.2",
+    "torch": "2.14.1+cpu",
+    "ultralytics": "8.4.175"
+  },
+  "finished": "2026-10-13 01:17:29",
+  "final_val_metrics": {
+    "precision": 0.5207905275016678,
+    "recall": 0.46836345523178097,
+    "mAP50": 0.4709059055707639,
+    "mAP50-95": 0.22792292588012217
+  }
+}

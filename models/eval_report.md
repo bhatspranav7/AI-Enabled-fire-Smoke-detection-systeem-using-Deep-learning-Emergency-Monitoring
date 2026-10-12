@@ -1,29 +1,29 @@
 # Evaluation Report - Fire/Smoke Detector
 
-- Weights: `models/runs/fire_smoke_v1/weights/best.pt`
+- Weights: `models/best.pt`
 - Split: `test` (600 held-out images)
 - Image size: 416, device: CPU
-- Evaluated: 2026-10-13 00:56:34
+- Evaluated: 2026-10-13 01:19:01
 
 ## Detection metrics (Ultralytics val, conf sweep)
 
 | Class | Precision | Recall | F1 | mAP@0.5 | mAP@0.5:0.95 |
 |---|---|---|---|---|---|
-| **all** | 0.505 | 0.438 | 0.469 | 0.416 | 0.198 |
-| fire | 0.504 | 0.398 | 0.445 | 0.383 | 0.179 |
-| smoke | 0.505 | 0.479 | 0.492 | 0.450 | 0.217 |
+| **all** | 0.519 | 0.490 | 0.504 | 0.484 | 0.247 |
+| fire | 0.448 | 0.503 | 0.474 | 0.461 | 0.229 |
+| smoke | 0.590 | 0.476 | 0.527 | 0.508 | 0.265 |
 
 ## Operating point used by the decision engine (conf = 0.35, IoU = 0.5)
 
-- Precision 0.622 / Recall 0.319
-- TP 328, FP 199, FN 699
-- Images with at least one false alarm: 163 / 600
-- Images with a missed target: 331 / 600
-- Negative images: 60, of which clean: 59 (false-alarm rate on negatives: 0.0167)
+- Precision 0.685 / Recall 0.337
+- TP 346, FP 159, FN 681
+- Images with at least one false alarm: 130 / 600
+- Images with a missed target: 328 / 600
+- Negative images: 60, of which clean: 60 (false-alarm rate on negatives: 0.0)
 
 ## Latency (CPU)
 
-- Mean 117.6 ms, p95 195.5 ms -> ~8.5 FPS at imgsz 416 (measured over 50 images, single image per call)
+- Mean 31.9 ms, p95 34.5 ms -> ~31.4 FPS at imgsz 416 (measured over 100 images, single image per call)
 
 ## Error analysis
 
