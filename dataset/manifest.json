@@ -1,0 +1,147 @@
+{
+  "classes": {
+    "0": "fire",
+    "1": "smoke"
+  },
+  "seed": 42,
+  "created": "2026-10-12 23:29:50",
+  "sources": [
+    {
+      "name": "wildfire-40k",
+      "url": "https://huggingface.co/datasets/jojomoi-meme/fog_fire_detection",
+      "license": "CC-BY-4.0 (Roboflow Universe joachim-serv/wildfire-j4okv)",
+      "class_map": {
+        "0": "fire",
+        "1": "smoke"
+      },
+      "available": {
+        "train": {
+          "smoke": 18943,
+          "negative": 1467,
+          "both": 7054,
+          "fire": 2192
+        },
+        "test": {
+          "both": 790,
+          "smoke": 1906,
+          "fire": 463,
+          "negative": 204
+        },
+        "val": {
+          "smoke": 4869,
+          "negative": 430,
+          "both": 1947,
+          "fire": 635
+        }
+      },
+      "used": {
+        "train": {
+          "fire": 567,
+          "smoke": 567,
+          "both": 566,
+          "negative": 300
+        },
+        "val": {
+          "fire": 114,
+          "smoke": 113,
+          "both": 113,
+          "negative": 60
+        },
+        "test": {
+          "fire": 114,
+          "smoke": 113,
+          "both": 113,
+          "negative": 60
+        }
+      }
+    },
+    {
+      "name": "ISFire-4 (indoor)",
+      "url": "https://huggingface.co/datasets/shahriar-5/ISFire-4",
+      "license": "MIT (Roboflow Universe, IICT BUET)",
+      "class_map": {
+        "0": "smoke",
+        "1": "fire",
+        "2": "smoke",
+        "3": "fire"
+      },
+      "available": {
+        "test": {
+          "fire": 314,
+          "smoke": 367,
+          "both": 22
+        },
+        "train": {
+          "fire": 2351,
+          "both": 157,
+          "smoke": 2677,
+          "negative": 1
+        },
+        "val": {
+          "fire": 631,
+          "smoke": 799,
+          "both": 51
+        }
+      },
+      "used": {
+        "train": {
+          "fire": 421,
+          "smoke": 421,
+          "both": 157,
+          "negative": 1
+        },
+        "val": {
+          "fire": 75,
+          "smoke": 74,
+          "both": 51
+        },
+        "test": {
+          "fire": 89,
+          "smoke": 89,
+          "both": 22
+        }
+      }
+    }
+  ],
+  "splits": {
+    "train": {
+      "images": 3000,
+      "by_content": {
+        "fire": 988,
+        "smoke": 988,
+        "both": 723,
+        "negative": 301
+      },
+      "boxes": {
+        "fire": 2873,
+        "smoke": 2256
+      }
+    },
+    "val": {
+      "images": 600,
+      "by_content": {
+        "fire": 189,
+        "smoke": 187,
+        "both": 164,
+        "negative": 60
+      },
+      "boxes": {
+        "fire": 551,
+        "smoke": 487
+      }
+    },
+    "test": {
+      "images": 600,
+      "by_content": {
+        "fire": 203,
+        "smoke": 202,
+        "both": 135,
+        "negative": 60
+      },
+      "boxes": {
+        "fire": 582,
+        "smoke": 445
+      }
+    }
+  }
+}

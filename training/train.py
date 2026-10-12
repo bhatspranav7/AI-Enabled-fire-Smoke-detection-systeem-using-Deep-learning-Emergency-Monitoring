@@ -40,7 +40,9 @@ def main() -> None:
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--fraction", type=float, default=1.0, help="fraction of the train split to use")
     ap.add_argument("--resume", action="store_true")
+    ap.add_argument("--cache", default="ram", help="ram | disk | False  (ram speeds up CPU training a lot)")
     args = ap.parse_args()
+    cache = False if str(args.cache).lower() == "false" else args.cache
 
     import torch
     import ultralytics
@@ -63,6 +65,7 @@ def main() -> None:
         deterministic=True,
         patience=args.patience,
         fraction=args.fraction,
+        cache=cache,
         # augmentation (PDF 8.2: brightness/contrast, flip, scale, limited rotation)
         hsv_h=0.015, hsv_s=0.6, hsv_v=0.5,
         fliplr=0.5, scale=0.5, degrees=5.0, translate=0.1,
