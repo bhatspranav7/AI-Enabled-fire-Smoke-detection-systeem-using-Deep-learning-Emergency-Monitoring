@@ -61,7 +61,7 @@ See **[DEMO.md](DEMO.md)** for the full demonstration script (scenarios, what to
 | Detector | Ultralytics **YOLO11n** (lightweight baseline per PDF §5.2), pretrained COCO checkpoint fine-tuned |
 | Classes | `0 = fire`, `1 = smoke` (steam / dust / fog handled as hard negatives) |
 | Data | 3,000 train / 600 val / 600 test images, stratified fire-only / smoke-only / both / negative, drawn from two public YOLO-format sets: [fog_fire_detection (40.9k, CC-BY-4.0, mostly outdoor + CCTV)](https://huggingface.co/datasets/jojomoi-meme/fog_fire_detection) and [ISFire-4 (7.4k, MIT, indoor)](https://huggingface.co/datasets/shahriar-5/ISFire-4). Full register: [`dataset/DATASET_REGISTER.md`](dataset/DATASET_REGISTER.md) |
-| Training | 416 px, batch 16, 25 epochs, seed 42, early-stop patience 8, augmentation = HSV / flip / scale / ±5° rotation / mosaic, CPU (i5-1340P) |
+| Training | 416 px, batch 16, 10 epochs (CPU time budget), seed 42, augmentation = HSV / flip / scale / ±5° rotation / mosaic, CPU (i5-1340P) |
 | Artifacts | `models/best.pt`, `models/training_config.json`, `models/eval_metrics.json`, `models/eval_report.md`, `models/eval/` (PR curves, confusion matrix), `models/error_analysis/` (FP/FN examples) |
 
 Results on the held-out test split are in [`models/eval_report.md`](models/eval_report.md).
@@ -70,7 +70,7 @@ Reproduce:
 ```bash
 python training/download_datasets.py            # ~2 GB from Hugging Face
 python training/prepare_dataset.py              # builds dataset/yolo + configs/data.yaml + register
-python training/train.py --epochs 25 --imgsz 416 --batch 16
+python training/train.py --epochs 10 --imgsz 416 --batch 16     # ~70 min on a laptop CPU; use more epochs on a GPU
 python training/evaluate.py --split test --conf 0.35
 ```
 

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import os
 import pathlib
 import sqlite3
 import threading
@@ -9,7 +10,7 @@ import time
 from typing import Any, Optional
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-DB_PATH = ROOT / "backend" / "fire_smoke.db"
+DB_PATH = pathlib.Path(os.environ.get("FIRE_DB_PATH", ROOT / "backend" / "fire_smoke.db"))
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS devices (

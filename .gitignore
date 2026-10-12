@@ -30,6 +30,17 @@ logs/*.jsonl
 backend/*.db
 backend/*.db-journal
 
+# Paper / deck build artefacts
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.bbl
+paper/*.blg
+paper/page*.png
+ppt/node_modules/
+ppt/package*.json
+ppt/render/
+
 # OS / editor
 .DS_Store
 Thumbs.db

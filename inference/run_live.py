@@ -141,12 +141,15 @@ def main() -> None:
     ap.add_argument("--no-window", action="store_true", help="headless (dashboard only)")
     ap.add_argument("--no-buzzer", action="store_true")
     ap.add_argument("--max-seconds", type=float, default=0, help="stop automatically after N seconds (for tests)")
+    ap.add_argument("--backend", help="override backend URL from device_config.yaml, e.g. http://127.0.0.1:8001")
     args = ap.parse_args()
     started = time.monotonic()
 
     thr = load_yaml("thresholds.yaml")
     dev = load_yaml("device_config.yaml")
     mcfg = load_yaml("model_config.yaml")
+    if args.backend:
+        dev.setdefault("backend", {})["url"] = args.backend
 
     # ---------------------------------------------------------------- model
     from ultralytics import YOLO
