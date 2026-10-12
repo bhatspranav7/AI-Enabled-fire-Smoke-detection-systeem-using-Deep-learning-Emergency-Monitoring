@@ -1,0 +1,48 @@
+# Decision-engine thresholds (PDF section 11 / 13).
+# Kept outside source code so they can be tuned on validation data without touching the app.
+
+detection:
+  # Only these classes feed the decision engine.
+  classes: [fire, smoke]
+  # Detections below this confidence are discarded before anything else.
+  min_conf: 0.25
+
+temporal:
+  # Sliding time window (seconds) over which detections are counted.
+  window_seconds: 3.0
+
+  # ---- WARNING: "possible target, short evidence" ----
+  warning_conf: 0.35        # a frame counts as a 'possible' hit at/above this confidence
+  warning_min_hits: 3       # possible hits inside the window to enter WARNING
+
+  # ---- CONFIRMED: "high-confidence target, persistent" ----
+  confirm_conf: 0.55        # a frame counts as a 'strong' hit at/above this confidence
+  confirm_min_hits: 10      # strong hits inside the window to enter CONFIRMED
+  confirm_min_seconds: 2.0  # AND strong hits must span at least this long (no single-frame triggers)
+
+  # ---- Clearing (separate, lower threshold = hysteresis, avoids rapid switching) ----
+  clear_conf: 0.25          # anything at/above this keeps the event "present"
+  clear_seconds: 4.0        # no presence for this long -> WARNING->NORMAL or CONFIRMED->RECOVERY
+  recovery_seconds: 10.0    # stay in RECOVERY this long before returning to NORMAL
+
+sensors:
+  enabled: true
+  smoke_elevated: 600       # raw gas-sensor reading considered 'elevated'
+  temp_elevated_c: 45.0     # ambient temperature considered 'elevated'
+  stale_after_seconds: 15   # ignore readings older than this (sensor disconnect fail-safe)
+  # When sensors are elevated, visual confirmation needs fewer strong hits (fusion).
+  confirm_hits_when_elevated: 6
+  # Persistent elevated sensors with NO visual target -> SENSOR_WARNING
+  sensor_only_warning_seconds: 5.0
+
+zone:
+  # Optional region of interest (normalised 0-1, x1 y1 x2 y2). Detections whose centre
+  # falls outside are ignored. null = whole frame.
+  roi: null
+
+response:
+  buzzer: true                 # software buzzer on this PC (winsound) when CONFIRMED
+  actuator: false              # set true only with an isolated low-voltage prototype load
+  notify_on: [CONFIRMED, SENSOR_WARNING]
+  snapshot_on: [WARNING, CONFIRMED, SENSOR_WARNING]
+  notification_cooldown_seconds: 60

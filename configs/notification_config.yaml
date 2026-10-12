@@ -1,0 +1,21 @@
+# Notification channels (PDF section 23). Secrets live in .env, never here.
+
+channels:
+  console:
+    enabled: true
+
+  log_file:
+    enabled: true
+    path: logs/notifications.log
+
+  telegram:
+    enabled: false              # set true after putting TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID in .env
+    timeout_seconds: 5
+
+  email:
+    enabled: false              # set true after putting SMTP_* vars in .env
+    to: []
+
+message:
+  title: "FIRE/SMOKE ALERT"
+  include_evidence: true

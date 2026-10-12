@@ -1,0 +1,24 @@
+# Camera / device / location settings (PDF section 23).
+
+camera:
+  # Integer = local webcam index, string = video file path or RTSP/HTTP URL.
+  source: 0
+  width: 1280
+  height: 720
+  target_fps: 15            # frames fed to the model per second (capture may be faster)
+  reconnect_seconds: 3      # wait before retrying a lost camera
+
+device:
+  id: cam01
+  name: Lab Camera 1
+  location: Project Lab - Bench A
+
+backend:
+  enabled: true
+  url: http://127.0.0.1:8000
+  push_frame_every_seconds: 0.2   # live preview frame rate for the dashboard
+  timeout_seconds: 2
+
+evidence:
+  dir: evidence
+  min_seconds_between_snapshots: 5

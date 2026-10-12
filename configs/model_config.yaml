@@ -1,0 +1,17 @@
+# Checkpoint / input settings used by inference (PDF section 23).
+
+model:
+  # Trained checkpoint produced by training/train.py. If missing, inference falls back
+  # to the pretrained COCO checkpoint below (which does NOT know fire/smoke - demo only).
+  weights: models/best.pt
+  fallback_weights: yolo11n.pt
+  imgsz: 416
+  device: cpu
+  half: false
+  # Ultralytics NMS settings
+  iou: 0.5
+  max_det: 20
+
+classes:
+  0: fire
+  1: smoke
