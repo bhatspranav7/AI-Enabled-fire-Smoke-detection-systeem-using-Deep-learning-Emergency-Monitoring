@@ -36,7 +36,8 @@ CREATE INDEX IF NOT EXISTS idx_evt_start ON events(start_time);
 
 
 class Database:
-    def __init__(self, path: pathlib.Path = DB_PATH):
+    def __init__(self, path: Optional[pathlib.Path] = None):
+        path = path or DB_PATH  # resolved at call time so tests can point at a temporary file
         path.parent.mkdir(parents=True, exist_ok=True)
         self.conn = sqlite3.connect(str(path), check_same_thread=False)
         self.conn.row_factory = sqlite3.Row

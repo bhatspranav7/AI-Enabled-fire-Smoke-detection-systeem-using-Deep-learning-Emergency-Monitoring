@@ -140,7 +140,9 @@ def main() -> None:
     ap.add_argument("--no-backend", action="store_true")
     ap.add_argument("--no-window", action="store_true", help="headless (dashboard only)")
     ap.add_argument("--no-buzzer", action="store_true")
+    ap.add_argument("--max-seconds", type=float, default=0, help="stop automatically after N seconds (for tests)")
     args = ap.parse_args()
+    started = time.monotonic()
 
     thr = load_yaml("thresholds.yaml")
     dev = load_yaml("device_config.yaml")
@@ -356,6 +358,10 @@ def main() -> None:
                 elif k == ord("r"):
                     engine.reset()
                     print("[engine] reset")
+
+            if args.max_seconds and time.monotonic() - started > args.max_seconds:
+                print(f"[live] max-seconds reached; final state {res.state.value}")
+                break
 
             # ---- fps + pacing
             fps_n += 1
